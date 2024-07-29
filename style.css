@@ -1,0 +1,142 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;   
+    height: 50vh;
+}
+#slidebox{
+    width: 400px;
+    height: 200px;
+    margin-bottom: 2%;
+}
+/* Styling the images*/
+img{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-left: 0;
+}
+/* End of Styling the images*/
+
+#slide-controller{
+    width: 400px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#buttons{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+/*    --        styling the next and previous buttons   --          */
+#next , #prev{
+    width: 5vw;
+    border-radius: 10%;
+    border-color: #fdfdfd;
+    border-width: 0px;
+    box-shadow: 3px -2px 20px ;
+    background-color: blanchedalmond;
+    /* !!!!  Create a js code to remove the shadow when clicking on it !!!!!!!!*/
+}
+
+/*            End of styling the next and previous buttons             */
+
+/*     --       styling the navigation buttons      --       */
+#buttons button{
+    width: 50px;
+    height: 50px;
+    border: 0;
+    border-radius: 50%;  
+    margin-left: 1px; 
+}
+#buttons button:hover, #next:hover , #prev:hover{
+    opacity: 0.7;
+}
+/*            End of styling navigation buttons             */
+
+/*     --      transion behaviour        --       */
+.disabled-img-next{
+    /*want to create an animation here for images*/
+    animation-name: slidingNext;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+
+}
+/*        The Animation of the next slide            */
+@keyframes slidingNext {
+    
+    20%{
+        transform: translateX(-20%);
+        opacity: 0.8;
+    }
+    
+    50%{
+        transform: translateX(-50%);
+        opacity: 0.5;
+    }
+    
+    80%{
+        transform: translateX(-80%);
+        opacity: 0.2;
+    }
+    100%{ 
+        transform: translateX(-100%);
+        opacity : 0.0;
+    display: none;
+
+   }
+}
+/*     End of The Animation of the next slide            */
+
+/*This property for the prev click and will be but to the coming img */
+.enable-img-prev{
+    /*want to create an animation here for images*/
+    animation-name: slidingPrev;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+
+}
+/*        The Animation of the prev slide            */
+@keyframes slidingPrev   {
+    0%{
+        transform: translateX(-100%);
+        opacity : 0.0;
+        display: block;
+    }
+    20%{
+        transform: translateX(-80%);
+        opacity: 0.2;
+    }
+    
+    50%{
+        transform: translateX(-50%);
+        opacity: 0.5;
+    }
+    
+    80%{
+        transform: translateX(-20%);
+        opacity: 0.8;
+    }
+    100%{ 
+        transform: translateX(00%);
+        opacity : 1;
+   
+
+   }
+}   
+/*     End of The Animation of the prev slide            */
+.active-button{
+    animation-name: slowing;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes slowing {
+    100%{
+        background-color: chartreuse;   
+    }
+}
+/*        End of transion behaviour           */
