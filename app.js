@@ -1,196 +1,93 @@
-// making an array from the images
-let imgs = Array.from(document.getElementsByTagName('img'));
+let index = 0;
+let images = document.querySelectorAll('img')   
+let buttonContainer = document.getElementById('numbers')
+let buttons = []
+let indicator = document.getElementById('indicator')
+for(let i = 0; i <images.length;i++){
+    let Button = document.createElement('button')
+    Button.textContent = i + 1
+    buttonContainer.appendChild(Button)
+    buttons.push(Button)
+}
+buttons[0].classList.add('active')
+images[0].classList.add('visible')
+let next = document.getElementById('next')
+let prev = document.getElementById('prev')
+//////////////////////////////////////////////////////
+indicator.textContent = "Image number # " + (index + 1)
 
-//initializing the first img
-let number = 1;
-        console.log(number.toString())
+// next function
+if(index == images.length - 1)
+next.disabled = true 
 
-// making the buttons;
+function Next(){
+    prev.disabled = false   
+    if(index < images.length - 1){
+        console.log(index)
 
-    //Defining the container of the buttons ----------- 
-        let container = document.getElementById('buttons')
-    
-    // Defining the buttons array
-        let buttons = [];
-    //creating the elements ------------
-        imgs.forEach((element) => {
-        console.log(element);
-        let button = document.createElement('button');
-        button.id = '1' + number; 
-        let text = document.createTextNode(number)
-        button.appendChild(text)
-        container.appendChild(button);
-        buttons.push(button)
-        number++
-        })
-        console.log(buttons)
-// Checking for the worst cases
-        let initialValue = 1;
-        // initializing next and prev
-            let next = document.getElementById('next')
-            let prev = document.getElementById('prev')
-function checks(){
-    if(initialValue === 1 || initialValue === imgs.length){
-        if(initialValue === 1){
-        //disabling the prev button
-        prev.disabled = true
-     }
-        else{
-        //disabling the next button
-        next.disabled = true 
-        }
-    }
-    else{
-        next.disabled = false 
-        prev.disabled = false 
+
+        next.disabled = false
+        console.log(index)
+        images[index].classList.remove('visible')
+        buttons[index].classList.remove('active')
+        index++
+        images[index].classList.add('visible')
+        buttons[index].classList.add('active')
+        indicator.textContent = "Image number # " + (index + 1)
+        if(index == images.length - 1)
+            next.disabled = true 
     }
 }
-checks()
+// prev function
+if(index == 0)
+    prev.disabled = true
+function Prev(){
+    next.disabled = false
 
-
-//initial img
-document.getElementById('1' + initialValue).classList.add('active-button')
-
-
-// making the action of the buttons 
-    next.onclick = function(){
-        let currentImg = document.getElementById(initialValue) // defining the img that will be modified
-        console.log(initialValue) // debuging
-        console.log(currentImg) //debuging
-        let comingBut = document.getElementById('1' + (initialValue + 1)) // defining the button that will be active
-        console.log(comingBut) //debuging
-        buttons.forEach((x) =>{
-        x.classList.remove('active-button')
-    }) // reseting all buttons
-
-        if(currentImg.classList.contains('enable-img-prev')){
-            currentImg.classList.remove('enable-img-prev')
-        }
-        currentImg.classList.add('disabled-img-next')
-        comingBut.classList.add('active-button')
-        initialValue++
-        checks()
-    }
+    if(index > 0){
     
-    // --------prev ----------------------------------------------------------------
-    
-    prev.onclick = function(){
-        let comingImg = document.getElementById(initialValue - 1) // defining the img that will be modified
-        console.log(initialValue) // debuging
-        console.log(comingImg) //debuging
-        let comingBut = document.getElementById('1' + (initialValue - 1)) // defining the button that will be active
-        console.log(comingBut) //debuging
-        buttons.forEach((x) =>{
-        x.classList.remove('active-button')
-    }) // reseting all buttons
-        if(comingImg.classList.contains('disabled-img-next')){
-            comingImg.classList.remove('disabled-img-next')
-        }
-        comingImg.style.zIndex = 3
-        comingImg.classList.add('enable-img-prev')
-        comingBut.classList.add('active-button')
-        initialValue--
-        checks()
+        prev.disabled = false   
+        images[index].classList.remove('visible')
+        buttons[index].classList.remove('active')
+        index--
+        images[index].classList.add('visible')
+        buttons[index].classList.add('active')
+        indicator.textContent = "Image number # " + (index + 1)
+        if(index == 0)
+            prev.disabled = true   
+            
     }
-
-    // the spicific button
-    buttons[0].onclick = () =>{
-        buttons.forEach((x) =>{
-            x.classList.remove('active-button')
-        }) // reseting all buttons
-        let IImg = document.getElementById(initialValue)
-        let comingImg = document.getElementById(1) // defining the img that will be modified
-        let comingBut = document.getElementById('11') // defining the button that will be active
-        
-        imgs.forEach((x) => {
-            if(x == IImg){
-            x.style.zIndex = 1
-            }
-            else{
-            x.style.zIndex = 0
-        }})
-                
-        comingImg.style.zIndex = 2;
-        comingImg.classList.remove('enable-img-prev')
-
-        comingImg.offsetWidth
-        comingImg.classList.add('enable-img-prev')
-        comingBut.classList.add('active-button')
-        initialValue = 1
-        checks()
+}
+// button function 
+function moving(target){
+    if(target == images.length - 1)
+    {
+        next.disabled = true
+        prev.disabled = false 
+    }   
+    else if(target == 0){
+        prev.disabled = true
+        next.disabled = false
     }
-    buttons[1].onclick = () =>{
-        buttons.forEach((x) =>{
-            x.classList.remove('active-button')
-        }) // reseting all buttons
-        let IImg = document.getElementById(initialValue)
-        let comingImg = document.getElementById(2) // defining the img that will be modified
-        let comingBut = document.getElementById('12') // defining the button that will be active
-        imgs.forEach((x) => {
-            if(x == IImg){
-            x.style.zIndex = 1
-            }
-            else{
-            x.style.zIndex = 0
-        }})
-        comingImg.style.zIndex = 2;
-        comingImg.classList.remove('enable-img-prev')
-
-        comingImg.offsetWidth
-        comingImg.classList.add('enable-img-prev')
-        comingBut.classList.add('active-button')
-      
-        initialValue = 2
-        checks()
+    else{
+        next.disabled = false
+        prev.disabled = false
     }
-    buttons[2].onclick = () =>{
-        buttons.forEach((x) =>{
-            x.classList.remove('active-button')
-        }) // reseting all buttons
-        let IImg = document.getElementById(initialValue)
-        let comingImg = document.getElementById(3) // defining the img that will be modified
-        let comingBut = document.getElementById('13') // defining the button that will be active
-        imgs.forEach((x) => {
-            if(x == IImg){
-            x.style.zIndex = 1
-            }
-            else{
-            x.style.zIndex = 0
-        }})
+    console.log(index)
+    console.log(target)
+    images[index].classList.remove('visible')
+    buttons[index].classList.remove('active')
+    index = target
+    images[index].classList.add('visible')
+    buttons[index].classList.add('active')
+    indicator.textContent = "Image number # " + (index + 1)
 
-        comingImg.style.zIndex = 2;
-        comingImg.classList.remove('enable-img-prev')
+}
+console.log(buttons)
+///////////////////////////////////////////////////////
 
-        comingImg.offsetWidth
-        comingImg.classList.add('enable-img-prev')
-        comingBut.classList.add('active-button')
-        initialValue = 3
-        
-        checks()
-    }
-    buttons[3].onclick = () =>{
-        buttons.forEach((x) =>{
-            x.classList.remove('active-button')
-        }) // reseting all buttons
-        let IImg = document.getElementById(initialValue)
-        let comingImg = document.getElementById(4) // defining the img that will be modified
-        let comingBut = document.getElementById('14') // defining the button that will be active
-        imgs.forEach((x) => {
-            if(x == IImg){
-            x.style.zIndex = 1
-            }
-            else{
-            x.style.zIndex = 0
-        }})
-
-        comingImg.style.zIndex = 2;
-        comingImg.classList.remove('enable-img-prev')
-
-        comingImg.offsetWidth
-        comingImg.classList.add('enable-img-prev')
-        comingBut.classList.add('active-button')
-       
-        initialValue = 4
-        checks()
-    }
-    
+document.getElementById('next').addEventListener('click',() => Next())
+document.getElementById('prev').addEventListener('click',() => Prev())
+for(let i = 0; i < buttons.length;i++){
+    buttons[i].addEventListener('click', () => {moving(i)})
+}

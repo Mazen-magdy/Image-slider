@@ -1,142 +1,84 @@
-body{
+*{
+    margin: 0;
+    padding: 0;
+}
+
+main{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;   
-    height: 50vh;
 }
-#slidebox{
-    width: 400px;
-    height: 200px;
-    margin-bottom: 2%;
+#imgContainer{
+    width: 100vw;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
-/* Styling the images*/
-img{
+#imgContainer img{
+    width: 60vw;
+    height: 40%;
     position: absolute;
-    width: inherit;
-    height: inherit;
-    border-left: 0;
+    box-shadow: 0px 0px 3px #000;
+    z-index: 1;
+    opacity: 0;
+}   
+.visible{
+    animation: visible 0.5s forwards linear;
 }
-/* End of Styling the images*/
 
-#slide-controller{
-    width: 400px;
-    height: auto;
+@keyframes visible {
+    0%{
+        transform: translateY(-100%);
+        opacity: 1;
+    }
+    25%{
+        transform: translateY(25px);
+    }
+    50%{
+        transform: translateY(-15px);
+    }
+    75%{
+        transform: translateY(5px);
+    }
+    100%{
+        transform: translateY(00%);
+        opacity: 1;
+    }
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* ----------------------------------------------button section----------------------------------------------------------------------------------- */
+#buttonContainer{
+    width: 60vw;
+    position: relative;
+    left: 50%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    transform: translateX(-50%);
 }
-#buttons{
-    margin-left: 2%;
-    margin-right: 2%;
+#buttonContainer button{
+    width: 10%;
+    height: 20px;
+    border-radius: 0;
+    border: 1px solid #000;
+    background-color: #fff;
 }
-/*    --        styling the next and previous buttons   --          */
-#next , #prev{
-    width: 5vw;
-    border-radius: 10%;
-    border-color: #fdfdfd;
-    border-width: 0px;
-    box-shadow: 3px -2px 20px ;
-    background-color: blanchedalmond;
-    /* !!!!  Create a js code to remove the shadow when clicking on it !!!!!!!!*/
-}
-
-/*            End of styling the next and previous buttons             */
-
-/*     --       styling the navigation buttons      --       */
-#buttons button{
-    width: 50px;
-    height: 50px;
-    border: 0;
-    border-radius: 50%;  
-    margin-left: 1px; 
-}
-#buttons button:hover, #next:hover , #prev:hover{
+#buttonContainer button:hover{
     opacity: 0.7;
 }
-/*            End of styling navigation buttons             */
-
-/*     --      transion behaviour        --       */
-.disabled-img-next{
-    /*want to create an animation here for images*/
-    animation-name: slidingNext;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-
+#numbers{
+    width: 80%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
-/*        The Animation of the next slide            */
-@keyframes slidingNext {
-    
-    20%{
-        transform: translateX(-20%);
-        opacity: 0.8;
-    }
-    
-    50%{
-        transform: translateX(-50%);
-        opacity: 0.5;
-    }
-    
-    80%{
-        transform: translateX(-80%);
-        opacity: 0.2;
-    }
-    100%{ 
-        transform: translateX(-100%);
-        opacity : 0.0;
-    display: none;
-
-   }
+.active{
+    transform: scale(1.25);
+    background-color: aquamarine !important;
 }
-/*     End of The Animation of the next slide            */
-
-/*This property for the prev click and will be but to the coming img */
-.enable-img-prev{
-    /*want to create an animation here for images*/
-    animation-name: slidingPrev;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-
-}
-/*        The Animation of the prev slide            */
-@keyframes slidingPrev   {
-    0%{
-        transform: translateX(-100%);
-        opacity : 0.0;
-        display: block;
-    }
-    20%{
-        transform: translateX(-80%);
-        opacity: 0.2;
-    }
-    
-    50%{
-        transform: translateX(-50%);
-        opacity: 0.5;
-    }
-    
-    80%{
-        transform: translateX(-20%);
-        opacity: 0.8;
-    }
-    100%{ 
-        transform: translateX(00%);
-        opacity : 1;
-   
-
-   }
-}   
-/*     End of The Animation of the prev slide            */
-.active-button{
-    animation-name: slowing;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-@keyframes slowing {
-    100%{
-        background-color: chartreuse;   
-    }
-}
-/*        End of transion behaviour           */
